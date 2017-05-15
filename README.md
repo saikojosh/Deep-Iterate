@@ -52,11 +52,11 @@ A few things to take note of:
 ## API Overview
 
 ### deepIterate(input, path, iteratee);
-Iterate over a multidimensional array, passing only the values from the arrays to the iteratee. See the quick start example above or run the example with `node ./examples/basicExample.js`.
+Takes a multidimensional array and a period-delimited path (e.g. `days.workLog.jobs`) to iterate over. The iteratee will be called for every element in the most deeply nested array (e.g. `jobs`) and will be passed parameters for every array it encountered along the path. See the quick start example above or run the example with: `node ./examples/basicExample.js`.
 
 **Iteratee Signature:** iteratee(array1, array2, ...arrayN)
 
 ### deepIterate.withAllLevels(input, path, iteratee)
-Iterate over a multidimensional array, passing the values from all levels to the iteratee. See the quick start example above or run the example with `node ./examples/basicExample.js`.
+Takes a multidimensional array and a period-delimited path (e.g. `days.workLog.jobs`) to iterate over. The iteratee will be called for every element in the most deeply nested array (e.g. `jobs`) and will be passed parameters for every object OR array it encountered along the path. See the quick start example above or run the example with: `node ./examples/basicExample.js`.
 
 **Iteratee Signature:** iteratee(level1, level2, ...levelN)
