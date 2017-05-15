@@ -7,7 +7,7 @@
     "url": "https://github.com/saikojosh/Deep-Iterate/issues"
   },
   "name": "deep-iterate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Iterate through multidimensional arrays and arrays nested in objects e.g. \"days.data.jobs[0]\".",
   "keywords": [
     "deep",
@@ -18,9 +18,7 @@
     "nested"
   ],
   "main": "deepIterate.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "author": "Josh Cole <hello@joshuacole.me> (http://www.JoshuaCole.me)",
   "contributors": [
     {
@@ -28,9 +26,7 @@
       "email": "hello@joshuacole.me"
     }
   ],
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "latest",
     "eslint-config-recombix": "latest",
