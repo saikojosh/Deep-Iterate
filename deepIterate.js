@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * DEEP IERATE
+ * DEEP ITERATE
  */
 
 /*
