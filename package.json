@@ -1,0 +1,46 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saikojosh/Deep-Iterate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saikojosh/Deep-Iterate/issues"
+  },
+  "name": "deep-iterate",
+  "version": "0.0.1",
+  "description": "Iterate through multidimensional arrays and arrays nested in objects e.g. \"days.data.jobs[0]\".",
+  "keywords": [
+    "deep",
+    "iterate",
+    "iteratee",
+    "array",
+    "arrays",
+    "nested"
+  ],
+  "main": "deepIterate.js",
+  "scripts": {
+
+  },
+  "author": "Josh Cole <hello@joshuacole.me> (http://www.JoshuaCole.me)",
+  "contributors": [
+    {
+      "name": "Josh Cole",
+      "email": "hello@joshuacole.me"
+    }
+  ],
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-recombix": "latest",
+    "eslint-plugin-filenames": "latest",
+    "eslint-plugin-json": "latest",
+    "eslint-plugin-node": "^4.2.1",
+    "eslint-plugin-promise": "latest"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  }
+}
