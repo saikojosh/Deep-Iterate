@@ -1,7 +1,11 @@
 # Deep-Iterate
-Iterate through multidimensional arrays and arrays nested in objects e.g. "days.data.jobs[0]".
+Iterate through multidimensional arrays and arrays nested in objects e.g. "days.workLog.jobs" where `days` and `jobs` are arrays and `workLog` is a nested object.
+
+## Caution!
+Iterating over a multidimensional array can be slow and will block your application from doing any other processing whilst it's running. Please use sparingly.
 
 ## Quick Start
+Here's a simple example to get you started:
 
 ```javascript
 const deepIterate = require(`deep-iterate`);
@@ -37,17 +41,22 @@ deepIterate.withAllLevels(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, someOb
 });
 ```
 
+## Important Notes
+A few things to take note of:
+
+* The `path` must include the name of the variable, for example if you have an array called `days` the first part of the path must be `days.`.
+* The first and last part of the path must be arrays whilst the middle of the path can be either objects or arrays, for example `array1.someObject.anotherObject.array2`.
+* The iteratee function is called for every element in the most deeply nested array, for example with the path `array1.array2`, the iteratee will be called for every element in `array2`.
+* Can be used to iterate over a unidimensional array but will incur a performance penalty. You'd be better off calling `.forEach()` on your array.
+
 ## API Overview
 
 ### deepIterate(input, path, iteratee);
-Iterate over a multidimensional array, passing only the values from the arrays to the iteratee. See the quick start example above.
+Iterate over a multidimensional array, passing only the values from the arrays to the iteratee. See the quick start example above or run the example with `node ./examples/basicExample.js`.
 
 **Iteratee Signature:** iteratee(array1, array2, ...arrayN)
 
 ### deepIterate.withAllLevels(input, path, iteratee)
-Iterate over a multidimensional array, passing the values from all levels to the iteratee. See the quick start example above.
+Iterate over a multidimensional array, passing the values from all levels to the iteratee. See the quick start example above or run the example with `node ./examples/basicExample.js`.
 
 **Iteratee Signature:** iteratee(level1, level2, ...levelN)
-
-## Known Issues
-* You cannot provide an object as the input for deepIterate. The input must be an array.
