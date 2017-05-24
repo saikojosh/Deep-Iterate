@@ -7,7 +7,7 @@
     "url": "https://github.com/saikojosh/Deep-Iterate/issues"
   },
   "name": "deep-iterate",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Iterate through multidimensional arrays and arrays nested in objects e.g. \"days.data.jobs[0]\".",
   "keywords": [
     "deep",
