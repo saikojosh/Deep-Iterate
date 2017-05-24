@@ -2,7 +2,7 @@
 Iterate through multidimensional arrays and arrays nested in objects e.g. "days.workLog.jobs" where `days` and `jobs` are arrays and `workLog` is a nested object.
 
 ## Caution!
-Iterating over a multidimensional array can be slow and will block your application from doing any other processing whilst it's running. Please use sparingly.
+Iterating over a multidimensional array is synchronous, can be slow, and will block your application from doing any other processing whilst it's running. Please use sparingly.
 
 ## Quick Start
 Here's a simple example to get you started:
@@ -31,12 +31,12 @@ const jobsPerDay = [{
 }];
 
 // Iterate over the given path, passing the values from the arrays "jobsPerDay" and "jobs" to the iteratee.
-deepIterate(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, job) => {
+deepIterate(jobsPerDay, `someObject.jobs`, (day, job) => {
 	console.log(`${day.dayName}: ${job}`);
 });
 
 // Iterate over the given path, passing the values from every level to the iteratee.
-deepIterate.withAllLevels(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, someObject, job) => {
+deepIterate.withAllLevels(jobsPerDay, `someObject.jobs`, (day, someObject, job) => {
 	console.log(`${day.dayName}: (${someObject.someProp}) ${job}`);
 });
 ```
@@ -44,9 +44,8 @@ deepIterate.withAllLevels(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, someOb
 ## Important Notes
 A few things to take note of:
 
-* The `path` must include the name of the variable, for example if you have an array called `days` the first part of the path must be `days.`.
-* The first and last part of the path must be arrays whilst the middle of the path can be either objects or arrays, for example `array1.someObject.anotherObject.array2`.
-* The iteratee function is called for every element in the most deeply nested array, for example with the path `array1.array2`, the iteratee will be called for every element in `array2`.
+* The input you pass in must be an array, but it may contain nested arrays, nested objects or nested primitive values to any depth.
+* The iteratee function is called for every value in the most deep part of the path, for example with the path `array1.array2`, the iteratee will be called for every element in `array2`.
 * Can be used to iterate over a unidimensional array but will incur a performance penalty. You'd be better off calling `.forEach()` on your array.
 
 ## API Overview
