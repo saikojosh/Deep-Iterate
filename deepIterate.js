@@ -8,30 +8,44 @@
  * Execute the iteration recursively.
  */
 function executeDeepIterate (input, path, iteratee, depth = 0, values = [], options = {}) {
+	/* eslint no-param-reassign: 0 */
 
 	const isArray = Array.isArray(input);
 	const isObject = (typeof input === `object` && !isArray);
 	const nextDepth = depth + 1;
+	const pathParts = path.split(`.`);
+	const nextKey = pathParts.slice(depth, nextDepth)[0];
+	const maxDepth = pathParts.length + 1;
+	const isMaxDepth = (depth === maxDepth);
 
 	// Known issue, only works with arrays as the top level.
-	if (depth === 0 && !isArray) { throw new Error(`The input must be an array!`); }
+	if (depth === -1 && !isArray) { throw new Error(`The input must be an array!`); }
 
-	if (isArray) {
-		return input.forEach(item => executeDeepIterate(item, path, iteratee, nextDepth, values.concat(item), options));
+	// For arrays, recurse into every element without increasing the depth.
+	if (!isMaxDepth && isArray) {
+		return input.forEach(item => executeDeepIterate(item, path, iteratee, depth, values.concat(item), options));
 	}
 
-	else if (isObject) {
-		const pathParts = path.split(`.`);
-		const nextKey = pathParts.slice(depth, nextDepth);
-		const nextLevelDown = input[nextKey];
-		const nextValues = (options && options.includeAllLevels ? values.concat(nextLevelDown) : values);
+	// For objects, recurse into the next key, or if there are no deeper keys in the path just increase the depth.
+	else if (!isMaxDepth && isObject) {
+		let nextLevelDown;
 
+		if (typeof nextKey !== `undefined`) {
+			nextLevelDown = input[nextKey];
+		}
+		else {
+			nextLevelDown = input;
+		}
+
+		const nextValues = (options && options.includeAllLevels ? values.concat(nextLevelDown) : values);
 		return executeDeepIterate(nextLevelDown, path, iteratee, nextDepth, nextValues, options);
 	}
 
-	// If the input is a primitive value we are probably iterating over an array of primitives and should execute the
-	// iteratee function on all the array values we've accumulated so far.
-	return iteratee(...values);
+	// If we're at the deepest part of the path OR we have a primitive value lets call the iteratee with all the values.
+	else if (isMaxDepth || (!isArray && !isObject)) {
+		values = values.concat(input);
+		return iteratee(...values);
+	}
 
 }
 
