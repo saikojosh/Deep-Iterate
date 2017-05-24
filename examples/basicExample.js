@@ -29,11 +29,11 @@ const jobsPerDay = [{
 }];
 
 // Iterate over the given path, passing the values from the arrays "jobsPerDay" and "jobs" to the iteratee.
-deepIterate(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, job) => {
+deepIterate(jobsPerDay, `someObject.jobs`, (day, job) => {
 	console.log(`${day.dayName}: ${job}`);
 });
 
 // Iterate over the given path, passing the values from every level to the iteratee.
-deepIterate.withAllLevels(jobsPerDay, `jobsPerDay.someObject.jobs`, (day, someObject, job) => {
+deepIterate.withAllLevels(jobsPerDay, `someObject.jobs`, (day, someObject, job) => {
 	console.log(`${day.dayName}: (${someObject.someProp}) ${job}`);
 });
